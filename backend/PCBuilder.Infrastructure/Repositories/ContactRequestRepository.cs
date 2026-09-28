@@ -10,7 +10,7 @@ using PCBuilder.Infrastructure.Data;
 
 namespace PCBuilder.Application.Services
 {
-    public class ContactRequestRepository : IContactRequest
+    public class ContactRequestRepository : IContactRequestRepository
     {
         private readonly ApplicationDbContext _context;
         public ContactRequestRepository(ApplicationDbContext context) 
@@ -18,20 +18,12 @@ namespace PCBuilder.Application.Services
             _context = context;
         }
 
-        public async Task<ContactRequest> CreateContactRequest(ContactRequestDTO contactRequest)
+        public async Task<ContactRequest> CreateContactRequest(ContactRequest contactRequest)
         {
-            var newContactRequest = new ContactRequest
-            {
-                Id = Guid.NewGuid(),
-                Email = contactRequest.Email,
-                Name = contactRequest.Name,
-                Message = contactRequest.Message,
-                CreatedAt = DateTime.Now,
-            };
-            _context.Add(newContactRequest);
+            _context.Add(contactRequest);
             await _context.SaveChangesAsync();
 
-            return newContactRequest;
+            return contactRequest;
         }        
     }
 }

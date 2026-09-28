@@ -9,19 +9,17 @@ namespace PCBuilder.API.Controllers
     [Route("api/[Controller]")]
     public class ContactController : Controller
     {
-        private readonly IContactRequest _contactRequest;
-        public ContactController(IContactRequest contactRequest)
+        private readonly IContactRequestRepository _contactRequest;
+        public ContactController(IContactRequestRepository contactRequest)
         {
             _contactRequest = contactRequest;
         }
+
         [HttpPost]
-        public async Task<ActionResult<ContactRequest>> CreateContactRequest(ContactRequestDTO contactRequestDTO)
+        public async Task<ActionResult<ContactRequest>> CreateContactRequest(ContactRequest contactRequest)
         {
-            var createContactRequest = await _contactRequest.CreateContactRequest(contactRequestDTO);
-            if (createContactRequest == null)
-            {
-                return NotFound();
-            }
+            var createContactRequest = await _contactRequest.CreateContactRequest(contactRequest);
+            
             return Ok(createContactRequest);
         }
     }

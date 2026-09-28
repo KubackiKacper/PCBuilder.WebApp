@@ -8,9 +8,8 @@ using PCBuilder.Domain.Entities;
 
 namespace PCBuilder.Application.Interfaces
 {
-    public interface IContactRequest
+    public interface IContactRequestRepository
     {
-        public Task<ContactRequest> CreateContactRequest(ContactRequestDTO contactRequest);
-        
+        public Task<ContactRequest> CreateContactRequest(ContactRequest contactRequest);        
     }
 }

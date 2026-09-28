@@ -12,7 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IServiceService, ServiceService>();
-builder.Services.AddScoped<IContactRequest, ContactRequestRepository>();
+builder.Services.AddScoped<IContactRequestRepository, ContactRequestRepository>();
 builder.Services.AddControllers();
 var app = builder.Build();
 
