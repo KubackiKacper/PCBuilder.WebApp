@@ -8,7 +8,7 @@ using PCBuilder.Application.Interfaces;
 using PCBuilder.Domain.Entities;
 using PCBuilder.Infrastructure.Data;
 
-namespace PCBuilder.Application.Services
+namespace PCBuilder.Infrastructure.Repositories
 {
     public class ContactRequestRepository : IContactRequestRepository
     {

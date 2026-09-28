@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PCBuilder.Application.Interfaces;
 using PCBuilder.Application.Services;
 using PCBuilder.Infrastructure.Data;
+using PCBuilder.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IContactRequestRepository, ContactRequestRepository>();
+builder.Services.AddScoped<ContactRequestService>();
 builder.Services.AddControllers();
 var app = builder.Build();
 

@@ -2,6 +2,7 @@
 using PCBuilder.Application.DTOs;
 using PCBuilder.Application.Interfaces;
 using PCBuilder.Domain.Entities;
+using PCBuilder.Application.Services;
 
 namespace PCBuilder.API.Controllers
 {
@@ -9,16 +10,17 @@ namespace PCBuilder.API.Controllers
     [Route("api/[Controller]")]
     public class ContactController : Controller
     {
-        private readonly IContactRequestRepository _contactRequest;
-        public ContactController(IContactRequestRepository contactRequest)
+        private readonly ContactRequestService _contactRequest;
+        public ContactController(ContactRequestService contactRequest)
         {
             _contactRequest = contactRequest;
         }
 
         [HttpPost]
-        public async Task<ActionResult<ContactRequest>> CreateContactRequest(ContactRequest contactRequest)
+        public async Task<ActionResult<ContactRequestDTO>> CreateContactRequest(ContactRequestDTO contactRequest)
         {
-            var createContactRequest = await _contactRequest.CreateContactRequest(contactRequest);
+            var createContactRequest = 
+                await _contactRequest.CreateContactRequest(contactRequest);
             
             return Ok(createContactRequest);
         }
