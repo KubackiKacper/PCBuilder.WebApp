@@ -10,6 +10,6 @@ namespace PCBuilder.Application.Interfaces
 {
     public interface IContactRequestRepository
     {
-        public Task<ContactRequest> CreateContactRequest(ContactRequest contactRequest);        
+        public Task<ContactRequest> AddContactRequestToDB(ContactRequest contactRequest);        
     }
 }

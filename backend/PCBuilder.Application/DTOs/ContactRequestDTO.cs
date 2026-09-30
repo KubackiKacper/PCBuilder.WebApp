@@ -18,7 +18,7 @@ namespace PCBuilder.Application.DTOs
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(100)]
         public string Message { get; set; } = string.Empty;
     }
 }

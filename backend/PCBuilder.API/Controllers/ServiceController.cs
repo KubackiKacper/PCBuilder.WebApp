@@ -17,7 +17,7 @@ namespace PCBuilder.API.Controllers
         public async Task<ActionResult<IEnumerable<ServiceDTO>>> GetAll()
         {
             var services = await _serviceService.GetAllAsync();
-            return Ok(services);
+            return NoContent();
         }
 
         [HttpGet("{id}")]
@@ -28,7 +28,7 @@ namespace PCBuilder.API.Controllers
             {
                 return NotFound();
             }
-            return Ok(serviceById);
+            return NoContent();
         }
 
         [HttpPost]
@@ -43,26 +43,15 @@ namespace PCBuilder.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, ServiceDTO dto)
+        public async Task Update(Guid id, ServiceDTO dto)
         {
-            var serviceToUpdate = await _serviceService.UpdateAsync(id, dto);
-
-            if (!serviceToUpdate)
-            {
-                return NotFound();
-            }
-            return Ok(serviceToUpdate);
+            await _serviceService.UpdateAsync(id, dto);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            var serviceToDelete = await _serviceService.DeleteAsync(id);
-            if (!serviceToDelete)
-            {
-                return NotFound();
-            }
-            return Ok(serviceToDelete);
+            await _serviceService.DeleteAsync(id);
         }
     }
 }

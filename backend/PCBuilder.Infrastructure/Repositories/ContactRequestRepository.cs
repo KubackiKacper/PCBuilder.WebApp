@@ -18,7 +18,7 @@ namespace PCBuilder.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<ContactRequest> CreateContactRequest(ContactRequest contactRequest)
+        public async Task<ContactRequest> AddContactRequestToDB(ContactRequest contactRequest)
         {
             _context.Add(contactRequest);
             await _context.SaveChangesAsync();

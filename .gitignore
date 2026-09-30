@@ -16,3 +16,5 @@ dist/
 
 # Environment files
 .env
+
+backend/PCBuilder.API/appsettings.Development.json
