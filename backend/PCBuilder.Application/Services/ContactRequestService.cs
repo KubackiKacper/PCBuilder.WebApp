@@ -31,7 +31,7 @@ namespace PCBuilder.Application.Services
             };
 
             var createdContactRequest =
-                await _repository.AddContactRequestToDB(newContactRequest);
+                await _repository.AddContactRequestAsync(newContactRequest);
 
             return new ContactRequestDTO
             {

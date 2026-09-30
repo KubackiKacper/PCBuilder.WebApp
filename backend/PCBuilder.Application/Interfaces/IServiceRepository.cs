@@ -10,10 +10,10 @@ namespace PCBuilder.Application.Interfaces
 {
     public interface IServiceRepository
     {
-        Task<Service> AddServiceToDB (Service service);
-        Task<Service> FindServiceById(Guid id);
-        Task SaveChangesToDbAsync();
-        Task DeleteServiceFromDB(Service service);
-        Task<IEnumerable<Service>> GetAllServicesFromDbAsync();
+        Task<Service> AddAsync(Service service);
+        Task<Service?> GetByIdAsync(Guid id);
+        Task SaveChangesAsync();
+        Task DeleteAsync(Service service);
+        Task<IEnumerable<Service>> GetAllAsync();
     }
 }

@@ -18,33 +18,28 @@ namespace PCBuilder.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<Service> AddServiceToDB(Service serviceToAdd)
+        public async Task<Service> AddAsync(Service serviceToAdd)
         {
             _context.Add(serviceToAdd);
             await _context.SaveChangesAsync();
             return serviceToAdd;
         }
-        public async Task<Service> FindServiceById(Guid id)
+        public async Task<Service?> GetByIdAsync(Guid id)
         {
-            var serviceById = await _context.Services.FindAsync(id);
-            if (serviceById == null)
-            {
-                throw new NullReferenceException();
-            }
-
+            var serviceById = await _context.Services.FindAsync(id);            
             return serviceById;
         }
-        public async Task<IEnumerable<Service>> GetAllServicesFromDbAsync()
+        public async Task<IEnumerable<Service>> GetAllAsync()
         {
             return await _context.Services.ToListAsync();
         }
-        public async Task DeleteServiceFromDB(Service service)
+        public async Task DeleteAsync(Service service)
         {
             _context.Remove(service);
-            await SaveChangesToDbAsync();
+            await SaveChangesAsync();
         }
 
-        public async Task SaveChangesToDbAsync()
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }

@@ -20,27 +20,29 @@ namespace PCBuilder.Application.Services
                 PriceFrom = serviceDTO.PriceFrom,
             };
 
-            var createdService = await _repository.AddServiceToDB(serviceToAdd);
+            var createdService = await _repository.AddAsync(serviceToAdd);
 
             return new ServiceDTO
             {
-                Id = serviceToAdd.Id,
-                Name = serviceToAdd.Name,
-                Description = serviceToAdd.Description,
-                PriceFrom = serviceToAdd.PriceFrom,
+                Id = createdService.Id,
+                Name = createdService.Name,
+                Description = createdService.Description,
+                PriceFrom = createdService.PriceFrom,
             };
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            var serviceToDelete = await _repository.FindServiceById(id);
+            var serviceToDelete = await _repository.GetByIdAsync(id);
+            if (serviceToDelete == null)
+                return;
 
-            await _repository.DeleteServiceFromDB(serviceToDelete);
+            await _repository.DeleteAsync(serviceToDelete);
         }
 
         public async Task<IEnumerable<ServiceDTO>> GetAllAsync()
         {
-            var services = await _repository.GetAllServicesFromDbAsync();
+            var services = await _repository.GetAllAsync();
 
             return services.Select(s => new ServiceDTO
             {
@@ -53,7 +55,9 @@ namespace PCBuilder.Application.Services
 
         public async Task<ServiceDTO?> GetByIdAsync(Guid id)
         {
-            var serviceById = await _repository.FindServiceById(id);
+            var serviceById = await _repository.GetByIdAsync(id);
+            if (serviceById == null)
+                return null;
 
             return new ServiceDTO
             {
@@ -66,13 +70,15 @@ namespace PCBuilder.Application.Services
 
         public async Task UpdateAsync(Guid id, ServiceDTO serviceDTO)
         {
-            var service = await _repository.FindServiceById(id);
+            var service = await _repository.GetByIdAsync(id);
+            if (service == null)
+                return;
 
             service.Name = serviceDTO.Name;
             service.Description = serviceDTO.Description;
             service.PriceFrom = serviceDTO.PriceFrom;
 
-            await _repository.SaveChangesToDbAsync();
+            await _repository.SaveChangesAsync();
         }
     }
 }
