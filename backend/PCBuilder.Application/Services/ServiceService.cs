@@ -14,7 +14,7 @@ namespace PCBuilder.Application.Services
         {
             var serviceToAdd = new Service
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Name = serviceDTO.Name,
                 Description = serviceDTO.Description,
                 PriceFrom = serviceDTO.PriceFrom,
