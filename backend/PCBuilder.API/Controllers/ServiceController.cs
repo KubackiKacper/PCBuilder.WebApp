@@ -17,7 +17,7 @@ namespace PCBuilder.API.Controllers
         public async Task<ActionResult<IEnumerable<ServiceDTO>>> GetAll()
         {
             var services = await _serviceService.GetAllAsync();
-            return NoContent();
+            return Ok(services);
         }
 
         [HttpGet("{id}")]
@@ -28,7 +28,7 @@ namespace PCBuilder.API.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(serviceById);
         }
 
         [HttpPost]
